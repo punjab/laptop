@@ -1,0 +1,24 @@
+#!/bin/sh
+
+brew bundle --file=- <<EOF
+brew "go"
+brew "ngrok"
+brew "watch"
+brew "colordiff"
+brew "bat"
+brew "jq"
+brew "mpv"
+brew "neovim"
+brew "tig"
+brew "tree"
+brew "youtube-dl"
+EOF
+
+fancy_echo "Cleaning up old Homebrew formulae ..."
+brew cleanup
+brew cask cleanup
+
+if [ -r "$HOME/.rcrc" ]; then
+  fancy_echo "Updating dotfiles ..."
+  rcup
+fi
